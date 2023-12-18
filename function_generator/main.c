@@ -78,11 +78,7 @@ void DACSetValue(unsigned int dac_code)
     // We are done transmitting, so de-assert CS (set = 1)
     DAC_PORT_CS_OUT |=  DAC_PIN_CS;
 
-    // This DAC is designed such that the code we send does not
-    // take effect on the output until we toggle the LDAC pin.
-    // This is because the DAC has multiple outputs. This design
-    // enables a user to send voltage codes to each output and
-    // have them all take effect at the same time.
+    
     DAC_PORT_LDAC_OUT &= ~DAC_PIN_LDAC;  // Assert LDAC
     __delay_cycles(10);                 // small delay
     DAC_PORT_LDAC_OUT |=  DAC_PIN_LDAC;  // De-assert LDAC
